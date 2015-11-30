@@ -124,11 +124,4 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 	curl -k --cert user.p12:password https://$MASTER:4523/v1/configuration/datasets
 	curl -k --cert user.p12:password https://$MASTER:4523/v1/state/datasets
 fi
-# LINUX
-# curl --cacert $PWD/cluster.crt --cert $PWD/user.crt --key $PWD/user.key https://master:4523/v1/configuration/containers
-# MAC (due to a bug in mac curl)
-openssl pkcs12 -export -inkey $PWD/user.key -in $PWD/user.crt -name user -out user.p12 -password pass:password
-curl -k --cert user.p12:password https://$MASTER:4523/v1/state/nodes
-curl -k --cert user.p12:password https://$MASTER:4523/v1/configuration/containers
-
 
