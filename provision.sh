@@ -42,7 +42,7 @@ printf '"version": 1
 dataset:
     backend: "aws"
     region: "eu-west-1"
-    zone: "eu-west-1c"
+    zone: "eu-west-1b"
     access_key_id: "%s"
     secret_access_key: "%s"
 ' "$1" "$2" "$3" | sudo tee /etc/flocker/agent.yml
