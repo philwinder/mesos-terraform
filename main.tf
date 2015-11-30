@@ -44,6 +44,18 @@ resource "aws_instance" "mesos-master" {
           "/tmp/provision.sh localhost ${var.access_key} ${var.secret_key}"
         ]
     }
+
+  provisioner "file" {
+        source = "provision-mesos-master.sh"
+        destination = "/tmp/provision-mesos.sh"
+    }
+
+    provisioner "remote-exec" {
+        inline = [
+          "chmod +x /tmp/provision-mesos.sh",
+          "/tmp/provision-mesos.sh localhost"
+        ]
+    }
 }
 
 resource "aws_instance" "mesos-agent" {
@@ -80,6 +92,19 @@ resource "aws_instance" "mesos-agent" {
           "/tmp/provision.sh ${aws_instance.mesos-master.public_dns} ${var.access_key} ${var.secret_key}" 
         ]
     }
+
+  provisioner "file" {
+        source = "provision-mesos-slave.sh"
+        destination = "/tmp/provision-mesos.sh"
+    }
+
+    provisioner "remote-exec" {
+        inline = [
+          "chmod +x /tmp/provision-mesos.sh",
+          "/tmp/provision-mesos.sh ${aws_instance.mesos-master.public_dns} localhost"
+        ]
+    }
+
 }
 
 output "# SSH key" { value = "\nexport KEY=$PWD/ssh_keys/key.pem" }

@@ -1,0 +1,10 @@
+{
+  "id": "flock-off",
+  "cpus": 0.1,
+  "mem": 16,
+  "instances": 1,
+  "cmd": "touch /tmp/data/hello.flocker ; sleep 1000000000",
+  "env": {
+    "FLOCKER_CONTAINER_VOLUME_PATH": "/tmp/data"
+  }
+}
