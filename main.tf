@@ -13,6 +13,7 @@ resource "aws_instance" "mesos-master" {
 
   count = 1
   ami   = "${lookup(var.aws_amis, var.aws_region)}"
+  availability_zone = "eu-west-1b"
 
   instance_type = "t2.large"
   key_name      = "${module.ssh_keys.key_name}"
@@ -61,6 +62,7 @@ resource "aws_instance" "mesos-master" {
 resource "aws_instance" "mesos-agent" {
   count = 3
   ami   = "${lookup(var.aws_amis, var.aws_region)}"
+  availability_zone = "eu-west-1b"
 
   instance_type = "t2.large"
   key_name      = "${module.ssh_keys.key_name}"
