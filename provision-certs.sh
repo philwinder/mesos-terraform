@@ -112,10 +112,10 @@ flocker-ca create-api-certificate user
 # Check it worked (Note, it takes a while for the flocker nodes to join the cluster)
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
 	# LINUX
-	curl --cacert $PWD/cluster.crt --cert $PWD/user.crt --key $PWD/user.key https://master:4523/v1/version
-	curl --cacert $PWD/cluster.crt --cert $PWD/user.crt --key $PWD/user.key https://master:4523/v1/state/nodes
-	curl --cacert $PWD/cluster.crt --cert $PWD/user.crt --key $PWD/user.key https://master:4523/v1/state/datasets
-	curl --cacert $PWD/cluster.crt --cert $PWD/user.crt --key $PWD/user.key https://master:4523/v1/configuration/datasets
+	curl --cacert $PWD/cluster.crt --cert $PWD/user.crt --key $PWD/user.key https://$MASTER:4523/v1/version
+	curl --cacert $PWD/cluster.crt --cert $PWD/user.crt --key $PWD/user.key https://$MASTER:4523/v1/state/nodes
+	curl --cacert $PWD/cluster.crt --cert $PWD/user.crt --key $PWD/user.key https://$MASTER:4523/v1/state/datasets
+	curl --cacert $PWD/cluster.crt --cert $PWD/user.crt --key $PWD/user.key https://$MASTER:4523/v1/configuration/datasets
 elif [[ "$OSTYPE" == "darwin"* ]]; then
 	# MAC (due to a bug in mac curl)
 	openssl pkcs12 -export -inkey $PWD/user.key -in $PWD/user.crt -name user -out user.p12 -password pass:password
