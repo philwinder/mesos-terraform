@@ -10,10 +10,11 @@ This terraform/bash script will create a cluster of one master and three agents 
 ## Usage
 1. cd into this repo
 2. `terraform get .`
-3. `terraform apply -var 'access_key=......' -var 'secret_key=......' .` where you should enter your id and secret appropriately.
-4. Copy and paste the output of the terraform script into your shell, to export the necessary env vars
-5. `./provision-certs.sh`
-6. Wait.
+3. `terraform plan -var 'access_key=......' -var 'secret_key=......'`
+4. `terraform apply -var 'access_key=......' -var 'secret_key=......' .` where you should enter your id and secret appropriately.
+5. Copy and paste the output of the terraform script into your shell, to export the necessary env vars
+6. `./provision-certs.sh`
+7. Wait.
 
 Optional, if you are using this with the mesos-flocker framework (https://github.com/ClusterHQ/mesos-module-flocker)
 7. Compule the .so module file
