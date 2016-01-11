@@ -9,3 +9,4 @@ echo 'docker,mesos' | sudo tee /etc/mesos-slave/containerizers
 printf '%s' "$2" | sudo tee /etc/mesos-slave/hostname
 echo '5mins' | sudo tee /etc/mesos-slave/executor_registration_timeout
 sudo service mesos-slave restart
+sudo usermod -a -G docker ubuntu
