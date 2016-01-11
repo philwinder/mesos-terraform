@@ -4,11 +4,6 @@
 // So, first run 'terraform get'
 // Finally, run the plan and apply steps to create the cluster. You can also provide the aws credentials with environmental variables like: TF_VAR_access_keys...
 
-module "ssh_keys" {
-  source = "ssh_keys"
-  name = "key"
-}
-
 resource "aws_instance" "mesos-master" {
 
   count = 1
@@ -16,7 +11,7 @@ resource "aws_instance" "mesos-master" {
   availability_zone = "eu-west-1b"
 
   instance_type = "t2.large"
-  key_name      = "${module.ssh_keys.key_name}"
+  key_name      = "${var.aws_key_name}"
   subnet_id     = "${aws_subnet.terraform.id}"
 
   vpc_security_group_ids = ["${aws_security_group.terraform.id}"]
@@ -25,7 +20,7 @@ resource "aws_instance" "mesos-master" {
 
   connection {
     user     = "ubuntu"
-    key_file = "${module.ssh_keys.private_key_path}"
+    key_file = "${var.private_key_file}"
   }
 
   provisioner "remote-exec" {
@@ -65,7 +60,7 @@ resource "aws_instance" "mesos-agent" {
   availability_zone = "eu-west-1b"
 
   instance_type = "t2.large"
-  key_name      = "${module.ssh_keys.key_name}"
+  key_name      = "${var.aws_key_name}"
   subnet_id     = "${aws_subnet.terraform.id}"
 
   vpc_security_group_ids = ["${aws_security_group.terraform.id}"]
@@ -74,7 +69,7 @@ resource "aws_instance" "mesos-agent" {
 
   connection {
     user     = "ubuntu"
-    key_file = "${module.ssh_keys.private_key_path}"
+    key_file = "${var.private_key_file}"
   }
 
   provisioner "remote-exec" {
@@ -109,7 +104,7 @@ resource "aws_instance" "mesos-agent" {
 
 }
 
-output "# SSH key" { value = "\nexport KEY=$PWD/ssh_keys/key.pem" }
+output "# SSH key" { value = "\nexport KEY=${var.private_key_file}" }
 output "# Master" { value = "\nexport MASTER=${aws_instance.mesos-master.public_dns}" }
 output "# Slave 0" { value = "\nexport SLAVE0=${aws_instance.mesos-agent.0.public_dns}" }
 output "# Slave 1" { value = "\nexport SLAVE1=${aws_instance.mesos-agent.1.public_dns}" }
