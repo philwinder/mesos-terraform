@@ -1,3 +1,0 @@
-#!/bin/bash
-
-curl --cacert cluster.crt --cert user.crt --key user.key https://$MASTER:4523/v1/version
