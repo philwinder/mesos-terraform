@@ -1,4 +1,4 @@
-# mesos-flocker-terraform
+# mesos-terraform
 
 This terraform/bash script will create a cluster of one master and three agents in a Mesos cluster.
 
