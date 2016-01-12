@@ -1,16 +1,14 @@
 # mesos-flocker-terraform
 
-This terraform/bash script will create a cluster of one master and three agents in a Mesos cluster, all running flocker. Please note that it uses a provided ssh key for simplicity. If you care about security, generate your own keys.
+This terraform/bash script will create a cluster of one master and three agents in a Mesos cluster.
 
 ## Prerequisites
-1. An AWS account and a AWS key and secret
+1. An AWS account, a AWS key and secret and an SSH key that has been uploaded or generated on AWS.
 2. Terraform
-3. The Flocker CLI tools [(flocker-cli)](https://docs.clusterhq.com/en/1.7.2/install/install-client.html#installing-flocker-cli)
 
 ## Usage
 1. cd into this repo
-1. `terraform get .`
-1. set variables
+2. set variables
 
     ```bash
     export TF_VAR_access_key=<AWS_ACCESS_KEY_ID> # e.g. ABADNBVDBVNBVFUQEO6Q
@@ -19,17 +17,11 @@ This terraform/bash script will create a cluster of one master and three agents 
     export TF_VAR_aws_key_name=<AWS SSH KEY NAME> # e.g. key
     ```
 
-1. `terraform plan`
-1. `terraform apply` 
-1. Copy and paste the output of the terraform script into your shell, to export the necessary env vars
-1. `./provision-certs.sh`
-1. Wait.
+3. `terraform plan`
+4. `terraform apply` 
+5. Copy and paste the output of the terraform script into your shell, to export the necessary env vars
 
-Optional, if you are using this with the mesos-flocker framework (https://github.com/ClusterHQ/mesos-module-flocker)
-7. Compule the .so module file
-8. `./copy-all-modules.sh` will copy the modules to the cluster. Edit the file to change the path to the so file (TODO).
-
-After a few minutes, this will have provisioned four new machines with the most recent version of Mesos Docker and Flocker and the curl requests at the end of the file should have resulted in some valid state information.
+After a few minutes, this will have provisioned four new machines with the most recent version of Mesos and Docker. The copy paste variables at the output represent the machine addresses and the ssh key location. You can then curl the machines as normal.
 
 If any one of these steps fail, something went wrong. Please debug. ;-)
 
