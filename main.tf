@@ -86,7 +86,7 @@ resource "aws_instance" "mesos-agent" {
     provisioner "remote-exec" {
         inline = [
           "chmod +x /tmp/provision.sh",
-          "/tmp/provision.sh ${aws_instance.mesos-master.public_dns} ${var.access_key} ${var.secret_key}" 
+          "/tmp/provision.sh ${aws_instance.mesos-master.public_dns} ${var.access_key} ${var.secret_key}"
         ]
     }
 
@@ -98,7 +98,7 @@ resource "aws_instance" "mesos-agent" {
     provisioner "remote-exec" {
         inline = [
           "chmod +x /tmp/provision-mesos.sh",
-          "/tmp/provision-mesos.sh ${aws_instance.mesos-master.public_dns} localhost"
+          "/tmp/provision-mesos.sh ${aws_instance.mesos-master.public_dns} ${self.public_dns}"
         ]
     }
 
@@ -109,5 +109,3 @@ output "# Master" { value = "\nexport MASTER=${aws_instance.mesos-master.public_
 output "# Slave 0" { value = "\nexport SLAVE0=${aws_instance.mesos-agent.0.public_dns}" }
 output "# Slave 1" { value = "\nexport SLAVE1=${aws_instance.mesos-agent.1.public_dns}" }
 output "# Slave 2" { value = "\nexport SLAVE2=${aws_instance.mesos-agent.2.public_dns}" }
-
-
