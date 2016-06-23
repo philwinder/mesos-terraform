@@ -1,0 +1,11 @@
+rexray:
+  storageDrivers:
+  - ec2
+  volume:
+    mount:
+      preempt: true
+    unmount:
+      ignoreUsedCount: true
+aws:
+  accessKey: TF_VAR_access_key
+  secretKey: TF_VAR_secret_key
