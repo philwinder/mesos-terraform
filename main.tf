@@ -10,6 +10,10 @@ resource "aws_instance" "mesos-master" {
   ami   = "${lookup(var.aws_amis, var.aws_region)}"
   availability_zone = "eu-west-1b"
 
+  root_block_device {
+    volume_size = 50
+  }
+
   instance_type = "t2.large"
   key_name      = "${var.aws_key_name}"
   subnet_id     = "${aws_subnet.terraform.id}"
@@ -59,6 +63,10 @@ resource "aws_instance" "mesos-agent" {
   ami   = "${lookup(var.aws_amis, var.aws_region)}"
   availability_zone = "eu-west-1b"
 
+  root_block_device {
+    volume_size = 50
+  }
+
   instance_type = "t2.large"
   key_name      = "${var.aws_key_name}"
   subnet_id     = "${aws_subnet.terraform.id}"
@@ -89,6 +97,11 @@ resource "aws_instance" "mesos-agent" {
           "/tmp/provision.sh ${aws_instance.mesos-master.public_dns} ${var.access_key} ${var.secret_key}"
         ]
     }
+
+  provisioner "file" {
+    source = "scripts"
+    destination = "/tmp"
+  }
 
   provisioner "file" {
         source = "provision-mesos-slave.sh"
