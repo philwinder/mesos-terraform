@@ -8,10 +8,19 @@ provider "aws" {
   secret_key = "${var.secret_key}"
 }
 
-// Ubuntu 14.04 LTS official hvm:ebs volumes to their region.
+// Ubuntu 15.04 LTS official hvm:ebs volumes to their region.
 variable "aws_amis" {
   default = {
-    eu-west-1       = "ami-47a23a30"
+    ap-northeast-1 = "ami-190e3477"
+    ap-southeast-1 = "ami-ec7ab58f"
+    eu-central-1 = "ami-c59189a9"
+    eu-west-1 = "ami-9f388eec"
+    sa-east-1 = "ami-ff1f9f93"
+    us-east-1 = "ami-370c225d"
+    us-west-1 = "ami-4e1a6c2e"
+    cn-north-1 = "ami-fd79b090"
+    ap-southeast-2 = "ami-f6b79395"
+    us-west-2 = "ami-2f06e04f"
   }
 }
 
