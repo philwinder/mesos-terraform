@@ -18,7 +18,7 @@ sudo apt-get -y update
 sudo apt-get -y install openjdk-8-jre
 sudo update-alternatives --config java
 # Install mesos and marathon
-sudo apt-get -y install mesos=1.0.0-1.0.73.rc2.ubuntu1404 marathon
+sudo apt-get -y install mesos=1.0.0-2.0.89.ubuntu1404 marathon
 
  # Install docker
 curl -sSL https://get.docker.com/ | sh
