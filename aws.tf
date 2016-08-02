@@ -1,7 +1,3 @@
-variable "aws_region" {
-  default = "eu-west-1"
-}
-
 provider "aws" {
   region = "${var.aws_region}"
   access_key = "${var.access_key}"
@@ -38,7 +34,7 @@ resource "aws_subnet" "terraform" {
   vpc_id = "${aws_vpc.terraform.id}"
   cidr_block = "10.0.0.0/24"
   tags { Name = "terraform" }
-  availability_zone = "eu-west-1b"
+  availability_zone = "${var.aws_availability_zone}"
 
   map_public_ip_on_launch = true
 }

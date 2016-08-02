@@ -8,13 +8,13 @@ resource "aws_instance" "mesos-master" {
 
   count = 1
   ami   = "${lookup(var.aws_amis, var.aws_region)}"
-  availability_zone = "eu-west-1b"
+  availability_zone = "${var.aws_availability_zone}"
 
   root_block_device {
     volume_size = 50
   }
 
-  instance_type = "t2.large"
+  instance_type = "${var.aws_instance}"
   key_name      = "${var.aws_key_name}"
   subnet_id     = "${aws_subnet.terraform.id}"
 
@@ -61,13 +61,13 @@ resource "aws_instance" "mesos-master" {
 resource "aws_instance" "mesos-agent" {
   count = 3
   ami   = "${lookup(var.aws_amis, var.aws_region)}"
-  availability_zone = "eu-west-1b"
+  availability_zone = "${var.aws_availability_zone}"
 
   root_block_device {
     volume_size = 50
   }
 
-  instance_type = "t2.large"
+  instance_type = "${var.aws_instance}"
   key_name      = "${var.aws_key_name}"
   subnet_id     = "${aws_subnet.terraform.id}"
 
