@@ -23,8 +23,8 @@ resource "aws_instance" "mesos-master" {
   tags { Name = "mesos-master-${count.index}" }
 
   connection {
-    user     = "ubuntu"
-    key_file = "${var.private_key_file}"
+    user        = "ubuntu"
+    private_key = "${var.private_key_file}"
   }
 
   provisioner "remote-exec" {
