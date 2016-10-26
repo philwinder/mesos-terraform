@@ -77,7 +77,7 @@ resource "aws_instance" "mesos-agent" {
 
   connection {
     user     = "ubuntu"
-    key_file = "${var.private_key_file}"
+    private_key = "${file(var.private_key_file)}"
   }
 
   provisioner "remote-exec" {
