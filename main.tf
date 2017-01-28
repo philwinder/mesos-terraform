@@ -1,4 +1,4 @@
-// This script expects the aws key and secret as variables. This is necessary because we need access to the aws varialbes during the provisioning step.
+// This script expects the aws key and secret as variables. This is necessary because we need access to the aws variables during the provisioning step.
 // e.g. terraform apply -var 'access_key=......' -var 'secret_key=......' .
 
 // So, first run 'terraform get'
@@ -24,7 +24,7 @@ resource "aws_instance" "mesos-master" {
 
   connection {
     user     = "ubuntu"
-    key_file = "${var.private_key_file}"
+    private_key = "${file("${var.private_key_file}")}"
   }
 
   provisioner "remote-exec" {
@@ -77,7 +77,7 @@ resource "aws_instance" "mesos-agent" {
 
   connection {
     user     = "ubuntu"
-    key_file = "${var.private_key_file}"
+    private_key = "${file("${var.private_key_file}")}"
   }
 
   provisioner "remote-exec" {
