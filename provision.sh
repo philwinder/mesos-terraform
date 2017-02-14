@@ -15,7 +15,7 @@ echo "deb http://repos.mesosphere.io/${DISTRO} ${CODENAME}-testing main" | sudo 
 sudo add-apt-repository -y ppa:openjdk-r/ppa
 sudo apt-get -y update
 # Install
-sudo apt-get -y install openjdk-8-jre
+sudo apt-get -y install openjdk-8-jre python-minimal python-pip
 sudo update-alternatives --config java
 # Install mesos and marathon
 sudo apt-get -y install mesos=1.1.0-2.0.107.ubuntu1604 marathon=1.3.0-1.0.506.ubuntu1604

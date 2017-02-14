@@ -7,3 +7,4 @@ sudo sh -c "echo manual > /etc/init/mesos-slave.override"
 sudo service zookeeper restart
 sudo service mesos-master restart
 sudo service marathon restart
+pip install mesos.cli
